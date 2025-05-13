@@ -13,18 +13,26 @@ const Register = () => {
     e.preventDefault();
     setError('');
 
+    // Validar campos vacíos
+    if (!name || !email || !password) {
+      setError('Todos los campos son obligatorios');
+      return;
+    }
+
     try {
-      await axios.post(
+      const response = await axios.post(
         'http://localhost/divina-cocina-sql/register.php',
         { name, email, password },
         { withCredentials: true }
       );
-      navigate('/login');
+
+      if (response.data.success) {
+        alert('Registro exitoso. Redirigiendo...');
+        navigate('/login');
+      }
     } catch (err) {
-      const errorMessage = err.response?.data?.message || 
-                          (err.response?.status === 409 ? "El correo ya está registrado" : 
-                          'Error en el servidor');
-      setError(`Error: ${errorMessage}`);
+      const errorMessage = err.response?.data?.message || 'Error al registrarse';
+      setError(errorMessage);
     }
   };
 

@@ -21,13 +21,12 @@ const Login = () => {
 
       if (res.data.success) {
         localStorage.setItem('user_id', res.data.user_id);
+        localStorage.setItem('user_name', res.data.name); // Opcional
         navigate('/');
       }
     } catch (err) {
-      const errorMessage = err.response?.data?.error_detail || 
-                          err.response?.data?.message || 
-                          'Error de conexión';
-      setError(`Error: ${errorMessage}`);
+      const errorMessage = err.response?.data?.message || 'Error de conexión';
+      setError(errorMessage);
     }
   };
 
