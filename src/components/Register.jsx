@@ -21,7 +21,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost/divina-cocina-sql/register.php',
+'http://localhost/divina-cocina-sql/register.php',
         { name, email, password },
         { withCredentials: true }
       );
@@ -31,9 +31,12 @@ const Register = () => {
         navigate('/login');
       }
     } catch (err) {
-      const errorMessage = err.response?.data?.message || 'Error al registrarse';
-      setError(errorMessage);
-    }
+  if (err.response?.data?.message) {
+    setError(err.response.data.message); // Muestra mensajes del backend
+  } else {
+    setError("Error de conexión con el servidor");
+  }
+}
   };
 
   return (

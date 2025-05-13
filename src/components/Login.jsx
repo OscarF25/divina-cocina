@@ -14,16 +14,15 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        'http://localhost/divina-cocina-sql/login.php',
+        'http://localhost/divina-cocina-sql/register.php',
         { email, password },
         { withCredentials: true }
       );
 
       if (res.data.success) {
-        localStorage.setItem('user_id', res.data.user_id);
-        localStorage.setItem('user_name', res.data.name); // Opcional
-        navigate('/');
-      }
+  localStorage.setItem('user_id', res.data.user_id);
+  navigate('/'); // Redirige al home
+}
     } catch (err) {
       const errorMessage = err.response?.data?.message || 'Error de conexión';
       setError(errorMessage);
