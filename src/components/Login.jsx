@@ -14,10 +14,10 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        'http://localhost/divina-cocina-sql/register.php',
-        { email, password },
-        { withCredentials: true }
-      );
+    'http://localhost/divina-cocina-sql/register.php',
+    { name, email, password },
+    { headers: { 'Content-Type': 'application/json' } }
+);
 
       if (res.data.success) {
   localStorage.setItem('user_id', res.data.user_id);

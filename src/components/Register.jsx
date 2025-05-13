@@ -21,10 +21,10 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-'http://localhost/divina-cocina-sql/register.php',
-        { name, email, password },
-        { withCredentials: true }
-      );
+    'http://localhost/divina-cocina-sql/register.php',
+    { name, email, password },
+    { headers: { 'Content-Type': 'application/json' } }
+);
 
       if (response.data.success) {
         alert('Registro exitoso. Redirigiendo...');
